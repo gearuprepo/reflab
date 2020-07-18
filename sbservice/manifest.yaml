@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sbservicers
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: backend
+  template:
+    metadata:
+      name: sbservicers
+      labels:
+        type: backend
+    spec:
+      containers:
+      - name: sbservicecont
+        image: sbserviceimg:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 8080
+    #    livenessProbe:
+    #        httpGet:
+    #          path: /hello
+    #          port: 8080
+    #        initialDelaySeconds: 5
+    #        timeoutSeconds: 2 # Defaults to 1
+    #        periodSeconds: 5 # Defaults to 10
+    #        failureThreshold: 1 # Defaults to 3  
