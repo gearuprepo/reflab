@@ -21,13 +21,28 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-        ports:
-          - containerPort: 8080
-    #    livenessProbe:
-    #        httpGet:
-    #          path: /hello
-    #          port: 8080
-    #        initialDelaySeconds: 5
-    #        timeoutSeconds: 2 # Defaults to 1
-    #        periodSeconds: 5 # Defaults to 10
-    #        failureThreshold: 1 # Defaults to 3  
+#        ports:
+#          - containerPort: 8080
+        readinessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            periodSeconds: 1
+        livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sbservicesvc
+spec:
+  type: NodePort
+  selector:
+    type: backend
+  ports:
+  - port: 8080 # PODS port
+    nodePort: 30001 # The port on which the service can be accessed using node IP
