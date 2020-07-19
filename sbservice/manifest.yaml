@@ -1,12 +1,20 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: sbservicers
+  name: sbservicedep
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       type: backend
+  minReadySeconds: 1
+  progressDeadlineSeconds: 60
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate #The other normal option is Recreate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       name: sbservicers
