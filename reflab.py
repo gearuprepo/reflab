@@ -37,7 +37,7 @@ def clean(args):
 
 
 if __name__ == '__main__':     
-    projs = {"sbservice":"java","sbservice2:java","ngui":"ng"}
+    projs = {"sbservice":"java","sbservice2":"java","ngui":"ng"}
     currentDirectory = os.getcwd()
     cmd = input("What do you want to do \n 1. Cleanup docker \n 2. Build and Deploy\n::")
     if cmd == '1':
