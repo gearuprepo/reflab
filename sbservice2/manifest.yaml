@@ -3,7 +3,7 @@ kind: Deployment #https://kubernetes.io/docs/reference/generated/kubernetes-api/
 metadata:
   name: sbservice2dep
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       type: backend
@@ -31,15 +31,15 @@ spec:
             cpu: "500m"
 #        ports:
 #          - containerPort: 8080
-        readinessProbe:
-            httpGet:
-              path: /sbservice2/hello
-              port: 8080
-        livenessProbe:
-            httpGet:
-              path: /sbservice2/hello
-              port: 8080
-            initialDelaySeconds: 2
+#        readinessProbe:
+#            httpGet:
+#              path: /sbservice2/hello
+#              port: 8080
+#        livenessProbe:
+#            httpGet:
+#              path: /sbservice2/hello
+#              port: 8080
+#            initialDelaySeconds: 2
 ---
 
 apiVersion: v1
