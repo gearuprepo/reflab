@@ -1,20 +1,20 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment #https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentspec-v1-apps
 metadata:
   name: sbservicedep
 spec:
-  replicas: 3
+  replicas: 10
   selector:
     matchLabels:
       type: backend
-  minReadySeconds: 1
-  progressDeadlineSeconds: 60
-  revisionHistoryLimit: 5
-  strategy:
-    type: RollingUpdate #The other normal option is Recreate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+#  minReadySeconds: 1
+#  progressDeadlineSeconds: 60
+#  revisionHistoryLimit: 5
+#  strategy:
+#    type: RollingUpdate #The other normal option is Recreate
+#    rollingUpdate:
+#      maxSurge: 1
+#      maxUnavailable: 1
   template:
     metadata:
       name: sbservicers
@@ -35,12 +35,11 @@ spec:
             httpGet:
               path: /hello
               port: 8080
-            periodSeconds: 1
         livenessProbe:
             httpGet:
               path: /hello
               port: 8080
-
+            initialDelaySeconds: 2
 ---
 
 apiVersion: v1
