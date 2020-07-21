@@ -17,9 +17,9 @@ def build(args,type,flag,port):
         buildstr = 'ng build --prod'
         contport = 80
     runcmd(buildstr)
-    builddocker(args)
+    builddocker(args+'img')
     if(flag == 'y'):
-        rundocker(args,contport,port)
+        rundocker(args+'img',contport,port)
 
 def builddocker(args):
     runcmd('docker image rm '+args)
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     if cmd == '1':
         print("Cleaning")
         for proj in projs:
-            clean(proj)
+            clean(proj+'img')
     elif cmd == '2':
         inp = input("Do you want to start docker instances? (y/n): ")
         for proj in projs:
