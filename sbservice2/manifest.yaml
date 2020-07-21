@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment #https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#deploymentspec-v1-apps
 metadata:
-  name: sbservicedep
+  name: sbservice2dep
 spec:
   replicas: 2
   selector:
@@ -17,13 +17,13 @@ spec:
 #      maxUnavailable: 1
   template:
     metadata:
-      name: sbservicers
+      name: sbservice2rs
       labels:
         type: backend
     spec:
       containers:
-      - name: sbservicecont
-        image: sbserviceimg:latest
+      - name: sbservice2cont
+        image: sbservice2img:latest
         imagePullPolicy: Never
         resources:
           limits:
@@ -45,7 +45,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sbservicesvc
+  name: sbservice2svc
 spec:
   type: NodePort
   selector:
