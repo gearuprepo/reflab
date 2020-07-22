@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       type: backend
+      sub-domain: svc1
 #  minReadySeconds: 1
 #  progressDeadlineSeconds: 60
 #  revisionHistoryLimit: 5
@@ -20,6 +21,7 @@ spec:
       name: sbservicers
       labels:
         type: backend
+        sub-domain: svc1
     spec:
       containers:
       - name: sbservicecont
@@ -50,6 +52,8 @@ spec:
   type: NodePort
   selector:
     type: backend
+    sub-domain: svc1
   ports:
-  - port: 8080 # PODS port
-    nodePort: 30002 # The port on which the service can be accessed using node IP
+  - port: 8081 # PODS identitiy in the cluster port
+    targetPort: 8080 # Containers port (exposed by docker)
+    nodePort: 30001 # The port on which the service can be accessed using node IP
