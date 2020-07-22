@@ -49,11 +49,11 @@ kind: Service
 metadata:
   name: sbservice2svc
 spec:
-  type: NodePort
+#  type: NodePort
   selector:
     type: backend
     sub-domain: svc2
   ports:
   - port: 8080 # PODS Identity port in the cluster
     targetPort: 8080
-    nodePort: 30002 # The port on which the service can be accessed using node IP
+#    nodePort: 30002 # The port on which the service can be accessed using node IP

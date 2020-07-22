@@ -49,11 +49,22 @@ kind: Service
 metadata:
   name: sbservicesvc
 spec:
-  type: NodePort
+  #type: NodePort
   selector:
     type: backend
     sub-domain: svc1
   ports:
   - port: 8080 # PODS identitiy in the cluster port
     targetPort: 8080 # Containers port (exposed by docker)
-    nodePort: 30001 # The port on which the service can be accessed outside using node IP
+    #nodePort: 30001 # The port on which the service can be accessed outside using node IP
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  backend:
+    serviceName: sbservicesvc
+    servicePort: 8080 # Should match the port in service def(cluster port of the service)
