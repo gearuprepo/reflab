@@ -54,6 +54,6 @@ spec:
     type: backend
     sub-domain: svc1
   ports:
-  - port: 8081 # PODS identitiy in the cluster port
+  - port: 8080 # PODS identitiy in the cluster port
     targetPort: 8080 # Containers port (exposed by docker)
-    nodePort: 30001 # The port on which the service can be accessed using node IP
+    nodePort: 30001 # The port on which the service can be accessed outside using node IP
