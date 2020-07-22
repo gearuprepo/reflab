@@ -16,35 +16,47 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 
 ## Docker commands
+```bash
 Build for prod before executing docker
 docker build -t sbserviceimg .
 docker run -it --rm -p 8080:8080 sbserviceimg
-
+```
 ## For pointing to minikubes docker repo
+```bash
 eval $(minikube docker-env)
 Unsetting - eval $(minikube docker-env -u)
-
+```
 ## Kube get
+```bash
 kubectl get all -o wide
+```
 ## Kube Create
+```bash
 Kubectl create -f manifest.yaml
-For recording deployment (rolling strategy) kubectl create -f manifest.yaml --record
+For recording deployment (rolling strategy): kubectl create -f manifest.yaml --record
+```
 ## Kube Delete
+```bash
 Kubectl delete -f manifest.yaml
-
+```
 ## Kube service - Let’s take a look at the endpoint. It holds the list of Pods that should receive requests.
+```bash
 kubectl get -f svc/<svc>
 kubectl get ep <svc> -o yaml
-
+```
 ## To Ping the service endpoint
+
+```bash
 IP=$(minikube ip)
 PORT=$(kubectl get svc sbservicesvc -o jsonpath="{.spec.ports[0].nodePort}")
 curl -i "http://$IP:$PORT/sbservice/hello"
-
+```
 ## Rollout describe
+```bash
 kubectl rollout status -w -f manifest.yaml
-
+```
 ## Ingress related
+```bash
 minikube addons list
 minikube addons enable ingress
 kubectl get pods -n kube-system | grep ingress
@@ -52,3 +64,4 @@ curl -i "http://$IP/healthz"
 Single Service Ingress
 http://$IPING/sbservice/hello
 http://$IPING/sbservice/route2
+```
