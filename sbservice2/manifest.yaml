@@ -54,6 +54,6 @@ spec:
     type: backend
     sub-domain: svc2
   ports:
-  - port: 8082 # PODS Identity port in the cluster
+  - port: 8080 # PODS Identity port in the cluster
     targetPort: 8080
     nodePort: 30002 # The port on which the service can be accessed using node IP
